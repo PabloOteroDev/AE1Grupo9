@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> <!--Etiqueta de metadatos para poder usar emojis y símbolos como la eñe. La declaración Doctype ya implica el uso del utf-8, esto se hace en caso de tener navegadores más antiguos.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Para hacerlo responsive necesitamos declarar el tamaño del viewport, o de lo que se va a poder ver desde el navegador-->
+    <title>TPool - Quiénes somos 🏊</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"> <!--Conexión con nuestra hoja de estilos de CSS-->
+  </head>
+  <body>
+
+    <header id="barrarriba">
+      <img id="logo" src="src/piscina.png">
+      <!--Aquí irá el logo de la web, a la derecha-->
+      <nav role="navigation">
+        <div id="menu_toggle">
+          <input type="checkbox" />
+            <!--Aquí hay un truco para hacer que el menú haga pop up, con un checkbox que luego se controlará en CSS. Este elemento html es lo que en realidad está siendo clicado por el usuario en la web.-->
+          <div class="hamburger-menu">
+            <span class="hamburger-span"></span>
+            <span class="hamburger-span"></span>
+            <span class="hamburger-span"></span>
+          </div>
+              <!--Estos tres spans generarán el menú hamburguesa-->
+          <ul id="menu" class="font2">
+            <li> <a href="index.html">HOME</a></li>
+            <li> <a href="about.html">ABOUT</a></li>
+            <li> <a href="areas.html">ÁREAS</a></li>
+            <li> <a href="contacto.html">CONTACTO</a></li>
+            <li><a href="#">NOTICIAS</a></li>
+            <li><a href="#">PUBLICACIONES</a></li>
+            <li><a href="#">LOCALIZACIÓN</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Añadimos un marquee con su animación en css para darle vidilla-->
+    <section alt="marquesina">
+    <div id="barrapromo">
+      <ul class="textopromo font1">
+        <li class="barrita">/</li>
+        <li>Aprovecha</li>
+        <li>nuestros</li>
+        <li>descuentos</li>
+        <li>de</li>
+        <li>Verano</li>
+      </ul>
+      <ul class="textopromo font1" aria-hidden="true">
+        <li class="barrita">/</li>
+        <li>Aprovecha</li>
+        <li>nuestros</li>
+        <li>descuentos</li>
+        <li>de</li>
+        <li>Verano</li>
+      </ul>
+    </div>
+    </section>
+
+    <span style="display: block; background-color:#f2f2f2; height:25px;"> </span>
+
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <img src="src/patito.jpg" alt="foto de un patito">
+            <h3 class="font2">Nuestros valores</h3>
+            <p class="font1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at volutpat mauris. Fusce blandit accumsan sapien, sit amet blandit purus luctus eu.</span>
+          </div>
+          <div class="col">
+            <img src="src/pies.jpg" alt="foto de pies en piscina">
+            <h3 class="font2">Nuestra historia</h3>
+            <p class="font1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at volutpat mauris. Fusce blandit accumsan sapien, sit amet blandit purus luctus eu.</p>
+          </div>
+          <div class="col">
+            <img src="src/pina.jpg" alt="foto de una piña">
+            <h3 class="font2">Nuestros clientes</h3>
+            <p class="font1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at volutpat mauris. Fusce blandit accumsan sapien, sit amet blandit purus luctus eu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <span class="separador"></span>
+
+      <footer id="footer" class=font1>
+        <div class="container-foot">
+          <div class="footer-columna">
+            <h3>Sobre nosotros</h3>
+            <p>Estamos absolutamente locos por las piscinas, y nos apasiona llevar a cabo proyectos ambiciosos en los que suplir las necesidades de nuestros clientes.</p>
+          </div>
+          <div class="footer-columna">
+            <h3>Mapa del sitio</h3>
+            <ul>
+              <li> <a href="index.html">HOME</a></li>
+              <li> <a href="about.html">ABOUT</a></li>
+              <li> <a href="areas.html">ÁREAS</a></li>
+              <li> <a href="contacto.html">CONTACTO</a></li>
+              <li><a href="#">NOTICIAS</li>
+              <li><a href="#">PUBLICACIONES</li>
+              <li><a href="#">LOCALIZACIÓN</li>
+              <li><a href="#">NOTICIAS</a></li>
+              <li><a href="#">PUBLICACIONES</a></li>
+              <li><a href="#">LOCALIZACIÓN</a></li>
+            </ul>
+          </div>
+          <div class="footer-columna">
+            <h3>Contáctanos</h3>
+            <ul>
+              <li>2210 Calle de la piscina</li>
+              <li>Madrid, 28001</li>
+              <li>622312445</li>
+              <li><a href="mailto:info@thepoolcompany.com">info@thepoolcompany.com</a></li>
+            </ul>
+          </div>
+          <div class="footer-columna">
+            <h3>Síguenos</h3>
+            <ul class="social-icons">
+              <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom-bar">
+          <p>&copy; 2023 UNIR Grupo 9. Donato, Miguel, Nacho y Pablo.</p>
+        </div>
+      </footer>
+
+    </div>
+  </body>
+</html>

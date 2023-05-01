@@ -1,0 +1,818 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Comfortaa&display=swap");
+/*En este proyecto utilizaremos únicamente dos fuentes, Roboto para textos en general, y Comfortaa para displays y títulos*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0px;
+  list-style-type: none;
+  /*le quita los bullet points a los ítems de una lista*/
+}
+/*El selector * aplica a toda la página, haciendo esto ponemos a cero todos los márgenes y padding para aplicar los que queramos en nuestro CSS.*/
+
+body {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  /*Aplicamos el modelo flexbox a toda la página*/
+}
+
+.font1 {
+  font-family: "Roboto";
+}
+
+.font2 {
+  font-family: "Comfortaa";
+}
+
+/*Lo primero que vamos a definir en CSS es la barra de navegación, que ha de estar arriba del todo*/
+
+#barrarriba {
+  background-color: #f2f2f2; /*Best practices, mejor no usar blanco puro para el diseño. Este color muestra un gris claro que es más agradable a la vista*/
+  height: 55px;
+  display: flex;
+  flex-direction: row;
+}
+
+#logo {
+  height: 40px;
+  align-self: center;
+  padding-left: 25px;
+}
+
+
+nav {
+  background-color:#f2f2f2;
+  color: #292929; /*Por el mismo motivo para el negro*/
+  padding-left: 50px;
+  overflow: hidden;
+}
+
+nav input {
+  display: none;
+  /*Con este truco, hacemos la checkbox invisible y la ponemos justo debajo del hamburger menu*/
+}
+
+#menu {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 17px;
+}
+
+li {
+  align-self: center;
+}
+
+/*Hemos decidido que el menú pop up sea una facultad de la página responsive, que sólo
+pueda verse en móviles y tablets*/
+
+@media only screen and (max-width: 1024px) {
+  #logo {
+    /*para que esté en el centro vertical de la barra*/
+    padding-right: 10px;
+    height: 40px;
+  }
+
+  #barrarriba {
+    justify-content: flex-end;
+  }
+
+
+  #menu_toggle {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+    /*Esto hace que no pueda seleccionarse esta parte, que quedaría feo*/
+  }
+
+
+  #menu_toggle input {
+    display: block;
+    width: 70px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+    -webkit-touch-callout: none;
+  }
+
+  #menu {
+    overflow: hidden;
+    position: static;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    /*aumenta el espacio entre elementos en el modelo flexbox*/
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    padding-bottom: 100vh;
+    background-color: #f2f2f2;
+  /*Esto controla la transformación del menú pop up, expliquemos cómo funciona*/
+    /*Esta línea controla la localización inicial del menú, antes de activar el checkbox. Podemos ver que está transformada hacia la izquierda en el eje X, en un punto de la página que no puede ver el usuario*/
+    transform: translate(-100%);
+    /*Por último, esta línea controla la transformación de uno al otro, en 0.3 segundos y de manera fluida*/
+    transition: transform 0.3s ease-in;
+  }
+
+
+  #menu li {
+    padding: 10px 0;
+    font-size: 30px;
+  }
+
+  #menu_toggle input:checked ~ ul {
+    /*Finalmente, esta es la magia del menú, al estar activado el checkbox del menú, la transformación aplicada anteriormente se deshace, y el menú se "desesconde" para aparecer*/
+    transform: none;
+  }
+
+
+  /*Aquí el estilo del icono menú hamburguesa*/
+
+  .hamburger-menu {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  /* Estilo para los spans de hamburguesa */
+  .hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #292929;
+    position: absolute;
+    left: 0;
+  }
+
+/* Posición para el primer span */
+  .hamburger-menu span:first-child {
+    top:-50%;
+    /*background-color: red;
+    Como se ven igual, usamos los colores para afinar bien cuál span era cuál*/
+  }
+
+/* Posición para el segundo span */
+  .hamburger-menu span:nth-child(2) {
+    top: -10%;
+    /*background-color: blue;*/
+  }
+
+/* Posición para el tercer span */
+  .hamburger-menu span:last-child {
+    top: 30%;
+  /*background-color: green;*/
+  }
+
+} /*Fin del selector de menú hamburguesa expansivo para móviles*/
+
+
+
+/*Ahora agregamos una animación de subrayado a los links*/
+
+a {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  /*Para que ningún link de manera inicial se vea azul ni subrayado*/
+}
+
+/*A continuación, dos selectores que crean una animación bajo los
+links que hace que aparezca un subrayado cuando el ratón se posa sobre ellos o son
+tocados en la pantalla del móvil (hover) El selector before nos permite añadir
+elementos inmediatamente antes de cualquier otro elemento html, en este caso
+podemos controlar las coordenadas (bottom y left) para que esté debajo de los
+links.
+
+La transformación señala dos estados, scaleX(0), el inicial, que obliga a que la medida
+del subrayado sea 0 veces el tamaño del link, es decir, invisible,
+para  que no lo vea el usuario, no aparezca como tal; y
+scaleX(1.1), donde se amplía hasta su tamaño completo mediante la transición de 0.3s.
+Si jugáramos con scaleX podríamos hacer que fuese 1.5 veces o 3 veces el tamaño del link que subraya, pero mejor quedarse con un 10% más a los lados*/
+
+a::before {
+  content: ""; /*nada, una barra de color oscuro*/
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #292929;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+a:hover::before {
+  transform: scaleX(1.1);
+}
+
+/*Este efecto no queda bien en el botón de la hero picture, lo quitamos*/
+#hero a::before {
+  display: none;
+}
+
+/*Del mismo modo, lo transformamos para que en el footer se vean blancos, y no aparezca ninguno en los iconos de social media*/
+footer a::before {
+  background-color: #f2f2f2;
+}
+
+.social-icons a::before {
+  display: none;
+}
+
+/*Los siguientes selectores controlan la marquesina animada, muy útil para poner promociones
+de productos y cosas así.*/
+
+#barrapromo {
+  height: 100px;
+  background: rgba(0,212,255,1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  gap: 1rem;
+}
+
+.textopromo {
+  flex-shrink: 0; /*Esto es clave para que funcione el truco, así los elementos no se obligan a hacerse
+  más pequeños y no se apretujan*/
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  font-size: 80px;
+  animation: scroll 10s linear infinite; /*Esta es la animación de marquesina propiamente dicha*/
+  gap: 1rem;
+  font-weight: bold;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 1rem)); /*Hacemos que se mueva la marquesina
+    en el eje X hacia la izquierda (valor negativo), por el 100% del tamaño del bloque, es decir,
+    toda la marquesina */
+  }
+}
+
+/*El truco que hace que todo esto funcione es que hay la misma distancia de
+gap dentro del div textopromo, y en la animación. Así resetea antes y aparece de
+ manera fluida por la derecha de la marquesina */
+
+
+.barrita {
+  font-size: 200px; /*Hacemos la barra / más grande para que parezca que es un separador*/
+}
+
+/*Como es una barbaridad de tamaño tener la marquesina en móvil, vamos a reducirla para
+distintos tamaños de pantalla. Consideramos que la resolución de más de 1300px es en la
+que está escrito el código en su mayoría, hacemos excepciones para las resoluciones menores
+(Aunque es mejores prácticas hacerlo al revés, empezar desde lo pequeño y hacer excepción para lo
+grande, el resultado acaba siendo el mismo)*/
+/*En tablet en posición vertical*/
+@media only screen and (min-width:640px) and (max-width:768px) {
+  #barrapromo {
+    height: 50px;
+  }
+  .textopromo {
+    font-size: 40px;
+    animation: scroll 6s linear infinite;
+  }
+  .barrita {
+    font-size: 100px;
+  }
+}
+
+/*En tablet en posición horizontal*/
+@media only screen and (min-height:720px) and (min-width: 768px) and (max-width: 1024px) {
+  #barrapromo {
+    height: 75px;
+  }
+  .textopromo {
+    font-size: 60px;
+    animation: scroll 7.5s linear infinite;
+  }
+  .barrita {
+    font-size: 120px;
+  }
+}
+
+/*En móvil vertical*/
+@media only screen and (max-width:639px) {
+  #barrapromo {
+    height: 25px;
+  }
+  .textopromo {
+    font-size: 20px;
+    animation: scroll 4s linear infinite;
+  }
+  .barrita {
+    font-size: 50px;
+  }
+}
+/*En móvil horizontal*/
+@media only screen and (min-width:480px) and (max-height:500px) {
+  #barrapromo {
+    height: 35px;
+  }
+  .textopromo {
+    font-size: 25px;
+    animation: scroll 5s linear infinite;
+  }
+  .barrita {
+    font-size: 60px;
+  }
+}
+
+
+.separador {
+  display: block;
+  height: 25px;
+  background-color: rgba(0,212,255,1);
+}
+
+
+/*Todo para la hero picture irá aquí debajo*/
+
+#hero {
+  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("src/1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #f2f2f2;
+  padding: 100px;
+  text-align: center;
+}
+
+/*Igual que con la marquesina, cada tamaño mostrará una hero pic distinta*/
+/*En tablet en posición vertical*/
+@media only screen and (min-width:640px) and (max-width:850px) {
+  #hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("src/2.jpg");
+  }
+
+}
+
+/*En tablet en posición horizontal*/
+@media only screen and (min-height:720px) and (min-width: 768px) and (max-width: 1024px) {
+  #hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("src/5.jpg");
+  }
+
+}
+
+/*En móvil vertical*/
+@media only screen and (max-width:639px) {
+  #hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("src/sombra.jpg");
+  }
+}
+/*En móvil horizontal, igual que en la tablet*/
+@media only screen and (min-width:480px) and (max-height:500px) {
+  #hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("src/2.jpg");
+    padding: 10px 0px 100px 0px;
+  }
+
+}
+
+#hero h1 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+#hero p {
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+
+/*Botón rápidop para ir a contactar*/
+
+.boton {
+  background-color: #292929;
+  color: #f2f2f2;
+  padding: 20px 50px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/*al posar el cursor encima, se vuelve azul y cambia el color del texto*/
+.boton:hover {
+  background: rgba(0,212,255,1);
+  color: #292929;
+}
+
+/*El botón se veía roto en móvil, aquí lo arreglamos*/
+@media only screen and (max-width: 600px) {
+  .boton {
+    padding: 10px 20px;
+  }
+}
+
+
+/*Ahora nos ponemos con el contenido interno de la página, que en cada sección será distinto*/
+
+/*Todo lo siguiente será para tanto la página inicial como la sección about*/
+.section {
+  background-color: #f2f2f2;
+  padding: 50px 0;
+}
+
+.section p {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.section h3 {
+  font-size: 30px;
+  line-height: 1.5;
+}
+
+.section img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 30px;
+}
+
+.section img:hover {
+  /*Pequeña animación de grow*/
+  transform: scale(1.05);
+  transition: all 0.3s ease-in;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col {
+  flex: 1;
+  margin: 0 15px;
+}
+
+.col img {
+  max-height: 500px;
+  margin: auto;
+  padding-bottom: 25px;
+}
+
+/*Tablet*/
+@media (max-width: 800px) {
+  .col {
+    flex-basis: calc(50% - 30px);
+    margin-bottom: 30px;
+  }
+}
+
+/*Móvil*/
+@media (max-width: 600px) {
+  .col {
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
+  .col img {
+    width: 70vw;
+  }
+}
+
+/*Ahora para la sección de áreas de actuación*/
+.lista {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  font-size: 2vw;
+  max-width: 50vw;
+  margin: auto;
+  height: auto;
+  background-color: #292929;
+  text-align: center;
+  color: #f2f2f2;
+}
+
+
+video {
+  max-width: 50vw;
+  margin-bottom: 30px;
+}
+
+/*Móvil*/
+@media (max-width: 800px) {
+  video {
+    max-width: 60vw;
+  }
+  .titulo {
+    max-width: 60vw;
+  }
+}
+
+/*Móvil*/
+@media (max-width: 600px) {
+  video {
+    max-width: 80vw;
+  }
+  .titulo {
+    font-size: 3vw;
+    max-width: 80vw;
+  }
+}
+
+
+@media only screen and (min-width: 1200px) { /*Un pequeño adorno que sólo se verá en resoluciones amplias*/
+  #margen {
+    position: absolute;
+    display: block;
+    background-image: url("src/flamingo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:20vh;
+    width: 20vw;
+    left: 15%;
+    top: 15%;
+    transform: rotate(-15deg);
+  }
+}
+
+
+.areas-de-actuacion {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 60%;
+  align-items: center;
+  padding-bottom: 25px;
+  padding-top: 0px;
+}
+
+.area {
+  margin: auto;
+  position: relative;
+  width: 100%;
+  margin-bottom: 2%; /* (100-32*3)/2 */
+  position: relative;
+  background-color: #292929;
+  color: #f2f2f2;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.area h2 {
+  padding-bottom: 10px;
+}
+
+.area:hover {
+  background-color: rgba(0,212,255,1);
+  transition: all 0.3s ease-in;
+  color: #292929;
+}
+
+.areatexto {
+  padding: 40px;
+}
+
+/*Ahora nos ponemos con la zona de contacto, vamos a hacer un formulario simple con la apariencia de una piscina*/
+
+#llamada {
+  width: 50%;
+  margin:auto;
+  text-align: center;
+  font-size: 2em;
+  padding: 25px;
+  font-weight: bold;
+}
+
+.piscina {
+  margin:auto;
+  width: 70%;
+  padding: 30px 90px 90px 90px;
+  border: 6px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 20px 20px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 50px;
+  /*Le meto un background pattern que encontramos por ahí, parece una piscina con sus azulejos.*/
+    background-color: rgba(0, 182, 219, 1);
+    background-image:  repeating-linear-gradient(45deg, rgba(0,212,255,1) 25%, transparent 25%, transparent 75%, rgba(0,212,255,1) 75%, rgba(0,212,255,1)), repeating-linear-gradient(45deg, rgba(0,212,255,1) 25%, rgba(0, 182, 219, 1) 25%, rgba(0, 182, 219, 1) 75%, rgba(0,212,255,1) 75%, rgba(0,212,255,1));
+    background-position: 0 0, 13px 13px;
+    background-size: 26px 26px;
+  color: #292929;
+  font-size: 20px;
+  margin-bottom: 75px;
+}
+
+
+
+#termino {
+  /*La letra pequeña ha de ser pqeueña*/
+  font-size: 15px;
+  font-style: italic;
+}
+
+.piscina form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.piscina fieldset {
+  border: none;
+}
+
+.piscina input,
+.piscina select,
+.piscina textarea {
+    /*Efecto sombra en la piscina*/
+    border: 6px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 20px 20px 0   rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 2px solid rgba(0, 182, 219, 1);
+  background-color: #f2f2f2;
+  margin-bottom: 1rem;
+  font-size: 20px;
+  font-family: "Roboto";
+}
+
+.piscina input[type="submit"] {
+  background-color: #f2f2f2;
+  color: #292929;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.piscina input[type="submit"]:hover {
+  background-color: #F85376;
+  color: #f2f2f2;
+  transition: 0.3s ease-in;
+}
+
+.piscina input[type="checkbox"] {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+/* Para móvil */
+@media (max-width: 767px) {
+  #llamada {
+    width: 90%;
+    font-size: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+  }
+  .piscina {
+    width: 90%;
+    padding: 20px;
+  }
+  .piscina form {
+    width: 100%;
+  }
+
+  .piscina input,
+  .piscina select,
+  .piscina textarea {
+    font-size: 0.9rem;
+  }
+
+  .piscina input[type="submit"] {
+    font-size: 0.9rem;
+  }
+
+  .piscina legend {
+    font-size: 1.2rem;
+  }
+}
+
+/* Estilos del footer */
+
+footer {
+  background-color: #292929;
+  color: #f2f2f2;
+  padding: 50px 100px;
+}
+
+.container-foot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-columna {
+  flex: 1;
+  margin-right: 50px;
+  margin-bottom: 50px;
+}
+
+.footer-columna h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+#footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+#footer ul li {
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.social-icons li {
+  margin-right: 20px;
+}
+
+.social-icons li img {
+  max-width: 30px;
+}
+
+/* Estilo de la barra de abajo del todo */
+
+.bottom-bar {
+  background-color: rgba(0,212,255,1);
+  color: #292929;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Para tablet */
+
+@media (max-width: 800px) {
+  .container-foot {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-columna {
+    flex-basis: 50%;
+    margin-right: 0;
+    margin-bottom: 40px;
+  }
+
+  .bottom-bar {
+    font-size: 12px;
+  }
+}
+
+/* Para móvil */
+
+@media (max-width: 600px) {
+  footer {
+    padding: 50px;
+  }
+
+  .container-foot {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-columna {
+    flex-basis: 100%;
+    margin-right: 0;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+}

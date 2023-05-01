@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> <!--Etiqueta de metadatos para poder usar emojis y símbolos como la eñe. La declaración Doctype ya implica el uso del utf-8, esto se hace en caso de tener navegadores más antiguos.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Para hacerlo responsive necesitamos declarar el tamaño del viewport, o de lo que se va a poder ver desde el navegador-->
+    <title>TPool - Contacto 🏊</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"> <!--Conexión con nuestra hoja de estilos de CSS-->
+  </head>
+  <body>
+
+    <header id="barrarriba">
+      <img id="logo" src="src/piscina.png">
+      <!--Aquí irá el logo de la web, a la derecha-->
+      <nav role="navigation">
+        <div id="menu_toggle">
+          <input type="checkbox" />
+            <!--Aquí hay un truco para hacer que el menú haga pop up, con un checkbox que luego se controlará en CSS. Este elemento html es lo que en realidad está siendo clicado por el usuario en la web.-->
+          <div class="hamburger-menu">
+            <span class="hamburger-span"></span>
+            <span class="hamburger-span"></span>
+            <span class="hamburger-span"></span>
+          </div>
+              <!--Estos tres spans generarán el menú hamburguesa-->
+          <ul id="menu" class="font2">
+            <li> <a href="index.html">HOME</a></li>
+            <li> <a href="about.html">ABOUT</a></li>
+            <li> <a href="areas.html">ÁREAS</a></li>
+            <li> <a href="contacto.html">CONTACTO</a></li>
+            <li><a href="#">NOTICIAS</a></li>
+            <li><a href="#">PUBLICACIONES</a></li>
+            <li><a href="#">LOCALIZACIÓN</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!--Añadimos un marquee con su animación en css para darle vidilla-->
+    <section alt="marquesina">
+    <div id="barrapromo">
+      <ul class="textopromo font1">
+        <li class="barrita">/</li>
+        <li>Aprovecha</li>
+        <li>nuestros</li>
+        <li>descuentos</li>
+        <li>de</li>
+        <li>Verano</li>
+      </ul>
+      <ul class="textopromo font1" aria-hidden="true">
+        <li class="barrita">/</li>
+        <li>Aprovecha</li>
+        <li>nuestros</li>
+        <li>descuentos</li>
+        <li>de</li>
+        <li>Verano</li>
+      </ul>
+    </div>
+    </section>
+
+    <span style="display: block; background-color:#f2f2f2; height:25px;"> </span>
+
+    <span id="llamada" class="font2">No dudes en ponerte en contacto con nosotros</span>
+
+    <div class="piscina font1">
+      <form action="contactar" method="get">
+        <fieldset>
+            <label for="nombre">Nombre y apellidos:</label>
+            <input id="nombre" type="text">
+            <label for="nombre">Teléfono de contacto:</label>
+            <input id="telefono" type="number">
+            <label for="correo">Correo electrónico:</label>
+            <input id="correo" type="text">
+            <label for="mensaje">¿Qué necesitas?</label>
+            <textarea id="mensaje"></textarea>
+            <label for="refer">¿Cómo nos has conocido?</label>
+            <select name="referencia">
+              <option>Internet</option>
+              <option>Prensa</option>
+              <option>Amigos</option>
+              <option>Enemigos</option>
+              <option>Otro</option>
+            </select>
+            <label id="termino" for="terminos">Confirmo haber leído y aceptado los términos de uso y privacidad al contactar con The Pool Company (patent pending)</label>
+            <input type="checkbox" name="terminos" value="Y">
+            <input type="submit" class="font2" value="Enviar">
+
+        </fieldset>
+      </form>
+    </div>
+
+
+      <span class="separador"></span>
+
+      <footer id="footer" class=font1>
+        <div class="container-foot">
+          <div class="footer-columna">
+            <h3>Sobre nosotros</h3>
+            <p>Estamos absolutamente locos por las piscinas, y nos apasiona llevar a cabo proyectos ambiciosos en los que suplir las necesidades de nuestros clientes.</p>
+          </div>
+          <div class="footer-columna">
+            <h3>Mapa del sitio</h3>
+            <ul>
+              <li> <a href="index.html">HOME</a></li>
+              <li> <a href="about.html">ABOUT</a></li>
+              <li> <a href="areas.html">ÁREAS</a></li>
+              <li> <a href="contacto.html">CONTACTO</a></li>
+              <li><a href="#">NOTICIAS</a></li>
+              <li><a href="#">PUBLICACIONES</a></li>
+              <li><a href="#">LOCALIZACIÓN</a></li>
+            </ul>
+          </div>
+          <div class="footer-columna">
+            <h3>Contáctanos</h3>
+            <ul>
+              <li>2210 Calle de la piscina</li>
+              <li>Madrid, 28001</li>
+              <li>622312445</li>
+              <li><a href="mailto:info@thepoolcompany.com">info@thepoolcompany.com</a></li>
+            </ul>
+          </div>
+          <div class="footer-columna">
+            <h3>Síguenos</h3>
+            <ul class="social-icons">
+              <li><a href="#"> <img src="src/facebook.png"></a></li>
+              <li><a href="#"> <img src="src/instagram.png"></a></li>
+              <li><a href="#"> <img src="src/linkedin.png"></a></li>
+              <li><a href="#"> <img src="src/twitter.png"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom-bar">
+          <p>&copy; 2023 UNIR Grupo 9. Donato, Miguel, Nacho y Pablo.</p>
+        </div>
+      </footer>
+
+    </div>
+  </body>
+</html>
